@@ -1,0 +1,455 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Plantilla para el Formato EPG cuantitativo de la 
+% Escuela de POSGRADO DE LA UNIVERSIDAD NACIONAL DEL
+% ALTIPLANO - PUNO. 
+%
+% La presente plantilla sigue las indicaciones del 
+% siguiente enlace: https://drive.google.com/file/d/1yYM7YBnZbC7JnQ6O58tYuQ2SeFgz1ebW/view
+% se recomienda revisar el formato base y la Resolución Directoral  
+% Nº 0450-2020-DG-EPG-UNA-PUNO, para tener mayores detalles del 
+% formato. 
+%
+% La plantilla utiliza el formato APA 7. Y esta dividido según los 
+% capítulos solicitados por la Escuela de Posgrado-UNA-PUNO. Para editar
+% la dedicatoria, agradecimientos y demás secciones y capítulos se debe 
+% agregar el contenido en la pestaña correspondiente.
+% Para añadir figuras se sugiere agregarlos en la carpeta gráficos.
+% Para añadir referencias se realiza en mybib.bib
+%
+%Author Danitza Bermejo (danitza.bermejo@gmail.com)
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% tamaño A4 , tamaño de fuente:12
+\documentclass[a4paper,openany,12pt,oneside,hidelinks]{book}
+
+% Tipo de letra: Times New Román en todo el texto del informe de tesis.
+\usepackage[spanish,es-lcroman,es-tabla]{babel}
+\usepackage{mathptmx}
+\usepackage{graphicx,enumitem}
+\usepackage[utf8]{inputenc}
+\usepackage{ae}
+
+%Márgenes: derecho, superior e inferior 2,5 cm. e izquierdo 3,5 cm
+\usepackage[left=3.5cm,right=2.5cm,top=2.5cm,bottom=2.5cm]{geometry}
+
+%Otras librerías utilizadas
+\usepackage{acronym}
+\usepackage{xspace}
+\usepackage{hlundef}
+\usepackage{tesis}
+\usepackage{setspace}
+\usepackage{lineno}
+\usepackage{hyperref}
+\usepackage{xpatch}
+\usepackage{etoc}
+
+\newcommand*\SpecialDocumentsTocHeading
+{\vspace{4ex}\parbox[t]{\textwidth}{.}\par
+\global\let\SpecialDocumentsTocHeading\empty }
+
+%Modificar Anexos
+\usepackage{quotchap}
+\usepackage[titles]{tocloft}
+\renewcommand{\cftdot}{}
+\renewcommand\cftchappagefont{\normalfont} %normal fond page
+\usepackage{appendix}
+\newlistof{appendixchapter}{apx}{ÍNDICE DE ANEXOS}
+
+%%%%Para APA7th edition
+\usepackage{csquotes}
+\usepackage[style=apa,natbib=true,sortcites=true,sorting=nyt,backend=biber]{biblatex}
+\DefineBibliographyStrings{spanish}{andothers={\textit{et al}\adddot}}
+\DeclareLanguageMapping{spanish}{spanish-apa}
+\addbibresource{mybib.bib}
+
+%%%% interlineado contenido
+\usepackage[titles]{tocloft}
+\setlength{\cftbeforechapskip}{3pt}
+
+%%%tablas
+\usepackage{color,soul}
+\usepackage{etoolbox}
+\usepackage{amsmath}
+\usepackage{mathtools}
+\usepackage{float} %H de las tablas
+\usepackage{longtable} %tablas largas
+\usepackage[spanish,onelanguage,ruled,vlined]{algorithm2e}
+
+\usepackage[labelsep=period]{caption}
+\usepackage{subcaption}
+\usepackage{multicol}
+\usepackage{multirow}
+\usepackage{verbatim}
+\usepackage[table,xcdraw]{xcolor} % para resaltar en las tablas
+\usepackage{pdfpages} %añadir pdf
+\usepackage{wrapfig} %para poner imagenes con texto
+\usepackage{lscape}
+\usepackage[explicit, pagestyles]{titlesec}
+\usepackage{tabularx}
+\usepackage{booktabs}
+\newcolumntype{C}{>{\centering\arraybackslash}X} % centered version of "X" type
+\setlength{\extrarowheight}{1pt}
+\usepackage{makecell}
+\newcommand{\ra}[1]{\renewcommand{\arraystretch}{#1}}
+\usepackage{pifont} % DING
+\usepackage{xcolor} % color 
+\hypersetup{citecolor=blue}
+\hypersetup{urlcolor=red}
+\renewcommand\linenumberfont{\normalfont\small}
+
+% interlineado del documento (1.5)
+\renewcommand{\baselinestretch}{1.5}
+\renewcommand{\arraystretch}{1.0}% interlineado tablas
+\usepackage{multirow} %multi
+\usepackage{verbatim} % comentarios
+
+% BORRAR hipervínculo de referencias e hipervínculos de enlaces
+\newcommand{\defineauthorcolor}[2]{%
+  \colorlet{author#1}{#2}% Create an author colour
+  \expandafter\def\csname authoredby#1\endcsname{% Create author colour settings
+    \renewcommand{\cftchapfont}{\normalfont\color{author#1}}% Chapter colour
+    \renewcommand{\cftchappagefont}{\normalfont\color{author#1}}% Chapter colour
+    \renewcommand{\cftsecfont}{\normalfont\color{author#1}}% Section colour
+    \renewcommand{\cftsubsecfont}{\normalfont\color{author#1}}}% Subsection colour
+}
+\makeatletter
+\newcommand{\authoredby}[1]{\addtocontents{toc}{\protect\@nameuse{authoredby#1}}}%
+\makeatother
+\defineauthorcolor{A}{white}% Author A will be coloured red
+\defineauthorcolor{B}{black}% Author B will be coloured blue
+\def\UrlBreaks{\do\/\do-}
+
+\newenvironment{figrow}%
+{%
+	\centering\addtocounter{figure}{1}% if caption at bottom
+	\begin{enumerate}[%
+		itemsep=2pt,parsep=0em,
+		label={(\alph*)},
+		ref={(\alph*)}]
+}%
+{\end{enumerate}\addtocounter{figure}{-1}}
+\newcommand\img[1]
+{\raisebox
+	{\dimexpr-0.5\height+0.5ex}
+	{\includegraphics[width=0.225\textwidth]{#1}}
+}
+
+%Ubicación texto en Figura
+\newcounter{row}
+\renewcommand\therow{\thefigure\alph{row}}
+\newenvironment{imgrows}[1][\textwidth]
+{\begin{minipage}{#1}
+		\setcounter{row}{0}
+		\stepcounter{figure}
+	}
+	{\addtocounter{figure}{-1}%
+	\end{minipage}
+}
+\newcommand\imgrow
+{\vspace{0.5em}\par\noindent
+	\refstepcounter{row}
+	\makebox[1.5em][r]{(\alph{row})}
+}
+
+%Numeración en líneas
+\modulolinenumbers[1]
+\setlength\parindent{0cm} 
+\newpagestyle{main}{\setfoot{}{}{\thepage}}
+\pagestyle{main}
+\assignpagestyle{\chapter}{main}
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator*{\argmin}{arg\,min}
+
+%%%%%%%%%%%%%%%%%%%%%%%
+%%%% Agregar información de carátula
+%%%%%%%%%%%%%%%%%%%%%%%
+\Facultad{DIRECCIÓN ZONAL AREQUIPA - PUNO}
+\Escuela{ESCUELA/CFP: Tecnologías de la información}
+\TProfesional{}
+
+\title{\large{"Mejora en la presentación de servicios a través de la interactividad utilizando modelado 2D y animaciones."}}
+
+\author{\large{Alex Diego Rosas Quispe}  \\ \large{Brandon Gonzales Tinta}}
+
+\presidente{PRESIDENTE}{}
+\primer{PRIMER JURADO}{}
+\segundo{SEGUNDO JURAOD}{}
+\asesor{TERCER JURADO}{}{}
+\area{AREA}
+\tema{TEMA}
+%%%%%%%%%
+
+%%%%%%%%%%%%%
+% Acrónimos
+%%%%%%%%%%%%%
+\makeatletter
+\newcommand{\acroforeign}[1]{}
+
+% patch the environment to print the foreign definition:
+\AtBeginEnvironment{acronym}{%
+  \def\acroforeign#1{(#1)}%
+}
+% patch the acronym definition to safe the foreign definition:
+\expandafter\patchcmd\csname AC@\AC@prefix{}@acro\endcsname
+  {\begingroup}
+  {\begingroup\def\acroforeign##1{\csdef{ac@#1@foreign}{##1, }}}
+  {}
+  {\fail}
+% %   renew the first output to include the foreign definition if given:
+\renewcommand*{\@acf}[2][\AC@linebreakpenalty]{%
+  \ifAC@footnote
+    \acsfont{\csname ac@#2@foreign\endcsname\AC@acs{#2}}%
+    \footnote{\AC@placelabel{#2}\AC@acl{#2}{}}%
+  \else
+    \acffont{%
+      \AC@placelabel{#2}\AC@acl{#2}%
+      \nolinebreak[#1] %
+      \acfsfont{(\acsfont{\csname ac@#2@foreign\endcsname\AC@acs{#2}})}%
+    }%
+  \fi
+  \ifAC@starred\else\AC@logged{#2}\fi
+}
+\makeatother
+
+
+%%%%%%% Quitar contador por defecto de TOF y TOT
+\counterwithout{figure}{chapter}
+\counterwithout{table}{chapter}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%indent according to section
+\usepackage{changepage,lipsum,titlesec}
+\titleformat{\section}[block]{\bfseries}{\thesection.}{1em}{}
+\titleformat{\subsection}[block]{}{\thesubsection}{1em}{}
+\titleformat{\subsubsection}[block]{}{\thesubsubsection}{1em}{}
+\titlespacing*{\subsection} {2em}{3.25ex plus 1ex minus .2ex}{1.5ex plus .2ex}
+\titlespacing*{\subsubsection} {3em}{3.25ex plus 1ex minus .2ex}{1.5ex plus .2ex}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Tipo de letra: Times New Román en todo el texto del informe de tesis.
+\usepackage{times}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%     COMIENZO DEL DOCUMENTO       %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+\captionsetup[table]{
+  position=above,
+  justification=raggedright,
+  labelsep=newline, % <<< label and text on different lines
+  singlelinecheck=false, % <<< raggadright also when the caption
+  textfont=it
+}
+
+\captionsetup[figure]{
+  justification=raggedright,
+  singlelinecheck=false, % <<< raggadright also when the caption
+  labelfont=it
+}
+
+\begin{spacing}{1.2}%espacio de la caratula
+\maketitle %Compone la carátula 
+\end{spacing}
+
+\pagestyle{main} %Estilo
+
+%%%%%%% Espacio y formato de títulos y subtítulos %%%%%%%%%%%
+\makeatletter
+\pretocmd{\@chapter}{% <--- IMPORTANT
+\addtocontents{toc}{\cftpagenumbersoff{chapter}}% <--- IMPORTANT
+}{}{}
+\apptocmd{\@chapter}{% <--- IMPORTANT
+\addtocontents{toc}{\cftpagenumberson{chapter}}% <--- IMPORTANT
+}{}{}
+
+\apptocmd{\@chapter}{% <--- IMPORTANT
+ \addtocontents{toc}{\cftchappresnum\normalsize\bfseries{CAPÍTULO }}
+ }{}{}
+ \apptocmd{\@chapter}{% <--- IMPORTANT
+ \addtocontents{toc}{\normalsize\bfseries\protect\centering\thechapter \\ \hspace{0.5em}#1\par}%
+ }{}{}
+\makeatother
+
+%%%%%%% Espacio y formato de capítulo, secciones y subsecciones %%%%%%%%%%%
+
+\renewcommand{\thechapter}{\Roman{chapter}}
+\renewcommand{\thesection}{\arabic{chapter}.\arabic{section}}
+\renewcommand{\theequation}{\arabic{equation}}
+
+\titleformat{\chapter}[display]{\bfseries\centering}{\normalsize CAPÍTULO \thechapter}{0pt}{\normalsize #1}
+%reglones titulo
+\titlespacing{\chapter}{0pt}{-30pt}{0pt}
+
+\titleformat{\section}
+  {\normalfont\fontsize{12}{12}\bfseries}{\thesection}{1em}{#1}
+\titleformat{\subsection}
+  {\normalfont\fontsize{12}{12}\bfseries}{\thesubsection}{1em}{#1}
+\titleformat{\subsubsection}
+  {\normalfont\fontsize{12}{12}\bfseries}{\thesubsubsection}{1em}{#1}
+
+
+%%%%%% INICIO DE INDICE GENERAL
+
+\pagenumbering{roman}
+\setcounter{page}{1} %Inserta pag al índice general
+\addtocontents{toc}{~\hfill\textbf{Pág.}\par\medskip}
+\input{dedicatoria} %Inserta ldedicatoria
+\addcontentsline{toc}{chapter}{\normalfont DEDICATORIA}
+\input{Agradecimientos} %Inserta los agradecimientos
+\addcontentsline{toc}{chapter}{\normalfont AGRADECIMIENTOS}
+\cleardoublepage
+\renewcommand{\contentsname}{ÍNDICE GENERAL} %renombra  TOC a índice General
+\phantomsection
+\addcontentsline{toc}{chapter}{\normalfont ÍNDICE GENERAL}
+
+%%%%%%%%%%%% ÍNDICE GENERAL
+\tableofcontents %Inserta el índice general
+
+%%%%%%%%%%%% ÍNDICE DE TABLAS
+\cleardoublepage
+\renewcommand{\listtablename}{ÍNDICE DE TABLAS}
+\phantomsection
+\addcontentsline{toc}{chapter}{\normalfont ÍNDICE DE TABLAS}
+\addtocontents{lot}{~\hfill\textbf{Pág.}\par}
+\setlength{\cfttabindent}{0pt}
+\renewcommand{\cfttabpresnum}{\bfseries}
+\renewcommand{\cfttabaftersnum}{.}
+\listoftables
+
+%%%%%%%%%%%% ÍNDICE DE FIGURAS
+\cleardoublepage
+\renewcommand{\listfigurename}{ÍNDICE DE FIGURAS}
+\phantomsection
+\addcontentsline{toc}{chapter}{\normalfont ÍNDICE DE FIGURAS}
+\addtocontents{lof}{~\hfill\textbf{Pág.}\par}
+\setlength{\cftfigindent}{0pt} %remove indent
+\renewcommand{\cftfigpresnum}{\bfseries}
+\renewcommand{\cftfigaftersnum}{.}
+\listoffigures %Inserta el índice de figuras
+
+
+%%%%%%%%%%%% ÍNDICE DE ANEXOS
+\cleardoublepage
+\phantomsection
+\addcontentsline{toc}{chapter}{\normalfont ÍNDICE DE ANEXOS}
+\addtocontents{apx}{~\hfill\textbf{Pág.}\par}
+\listofappendixchapter
+
+
+%%%%%%%%%%%% ÍNDICE DE ACRÓNIMOS
+\cleardoublepage
+\phantomsection
+\addcontentsline{toc}{chapter}{\normalfont ÍNDICE DE ACRÓNIMOS}
+\input{abreviaturas}
+
+
+%%%%%%%%%%%% RESUMEN
+\cleardoublepage
+\phantomsection
+\addcontentsline{toc}{chapter}{\normalfont RESUMEN}
+\input{RESUMEN} %Inserta el resumen
+
+%%%%%%%%%%%% ABSTRACT
+\cleardoublepage
+\phantomsection
+\addcontentsline{toc}{chapter}{\normalfont ABSTRACT}
+\input{ABSTRACT} %Inserta el abstract
+
+%%%%%%%%%%%% INTRODUCCIÓN
+\cleardoublepage
+\pagenumbering{arabic}
+\setcounter{page}{1}
+\phantomsection
+\addcontentsline{toc}{chapter}{\normalfont INTRODUCCIÓN}
+\input{introduccion}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%   En esta parte deberás incluir los archivos de tu tesis   %%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\cleardoublepage
+\pagestyle{main}
+
+\authoredby{A}
+\input{1_Literatura} %Inserta el capítulo 1
+\authoredby{A}
+\input{2_Problema} %Inserta el capítulo 2
+\authoredby{A}
+\input{3_Metodologia} %Inserta el capítulo 3
+\authoredby{A}
+\input{4_Resultados} %Inserta el capítulo 4
+
+\cleardoublepage
+\phantomsection
+\addcontentsline{toc}{chapter}{\normalfont CONCLUSIONES}
+\input{conclusiones} %Inserta conclusiones
+
+\cleardoublepage
+\phantomsection
+\addcontentsline{toc}{chapter}{\normalfont RECOMENDACIONES}
+\input{recomendaciones} %Inserta recomendaciones
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\clearpage\phantomsection\addcontentsline{toc}{chapter}{\normalfont BIBLIOGRAFÍA}
+\renewcommand\bibname{BIBLIOGRAFÍA} %Inserta BIBLIOGRAFÍA EN APA7
+
+\printbibliography
+
+%%%%%%%%%%%
+\cleardoublepage
+\phantomsection
+\addcontentsline{toc}{chapter}{\normalfont ANEXOS}
+\input{anexo} %Inserta Anexos
+\addtocontents{toc}{\protect\SpecialDocumentsTocHeading}
+
+%%%%%%%%%%%%%
+%CONFIGURACIÓN DE ANEXOS
+%%%%%%%%%%%%%
+
+\appendix
+
+\makeatletter
+\def\@chapter[#1]#2{
+                        \ifnum \c@secnumdepth >\m@ne
+                         \refstepcounter{chapter}%
+                         \typeout{\@chapapp\space\thechapter.}%
+                         \addcontentsline{apx}{chapter}%NEW
+                        {\protect\numberline{\thechapter} \normalfont#1}%
+                       
+                    \else
+                      \addcontentsline{apx}{chapter}{#1}%NEW
+                    \fi
+                    \chaptermark{#1}%
+                    \addtocontents{lof}{\protect\addvspace{10\p@}}%
+                    \addtocontents{lot}{\protect\addvspace{10\p@}}%
+                    \if@twocolumn
+                    
+                      \@topnewpage[\@makechapterhead{#2}]%
+                    \else
+                      \@makechapterhead{#2}%
+                      \@afterheading
+                    \fi}
+\makeatother
+
+
+
+\renewcommand*{\thechapter}{\bfseries\arabic{chapter}.}
+
+\titleformat{\chapter}{\bfseries}{\large Anexo \thechapter}{0.5em}{\normalfont #1}
+
+\titlespacing*{\chapter}{0cm}{-\topskip}{0pt}[0pt]
+
+%%%%%%%%%%%%%
+%AQUÍ PUEDES AGREGAR TUS ANEXOS
+%%%%%%%%%%%%%
+
+\input{anexo1} %Inserta el anexo1
+
+
+\end{document}

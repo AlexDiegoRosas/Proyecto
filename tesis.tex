@@ -42,6 +42,8 @@
 \usepackage{hyperref}
 \usepackage{xpatch}
 \usepackage{etoc}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
 
 \newcommand*\SpecialDocumentsTocHeading
 {\vspace{4ex}\parbox[t]{\textwidth}{.}\par
@@ -56,11 +58,11 @@
 \newlistof{appendixchapter}{apx}{ÍNDICE DE ANEXOS}
 
 %%%%Para APA7th edition
-\usepackage{csquotes}
-\usepackage[style=apa,natbib=true,sortcites=true,sorting=nyt,backend=biber]{biblatex}
-\DefineBibliographyStrings{spanish}{andothers={\textit{et al}\adddot}}
+ \usepackage{csquotes}
+ \usepackage[style=apa,natbib=true,sortcites=true,sorting=nyt,backend=biber]{biblatex}
+ \DefineBibliographyStrings{spanish}{andothers={\textit{et al}\adddot}}
 \DeclareLanguageMapping{spanish}{spanish-apa}
-\addbibresource{mybib.bib}
+\addbibresource{tesis.bib}
 
 %%%% interlineado contenido
 \usepackage[titles]{tocloft}
@@ -102,6 +104,12 @@
 \renewcommand{\arraystretch}{1.0}% interlineado tablas
 \usepackage{multirow} %multi
 \usepackage{verbatim} % comentarios
+\usepackage{tikz}
+\usetikzlibrary{positioning, shapes, shadows, arrows.meta}
+\usepackage{pgfplots}
+\usetikzlibrary{calc}
+\usepackage{pgfgantt}
+% \pgfplotsset{compat=1.17}
 
 % BORRAR hipervínculo de referencias e hipervínculos de enlaces
 \newcommand{\defineauthorcolor}[2]{%
@@ -281,7 +289,7 @@
 \renewcommand{\thesection}{\arabic{chapter}.\arabic{section}}
 \renewcommand{\theequation}{\arabic{equation}}
 
-\titleformat{\chapter}[display]{\bfseries\centering}{\normalsize CAPÍTULO \thechapter}{0pt}{\normalsize #1}
+\titleformat{\chapter}[display]{\bfseries\centering}{\Large CAPÍTULO \thechapter}{0pt}{\Large #1}
 %reglones titulo
 \titlespacing{\chapter}{0pt}{-30pt}{0pt}
 
@@ -322,30 +330,30 @@
 \listoftables
 
 %%%%%%%%%%%% ÍNDICE DE FIGURAS
-\cleardoublepage
-\renewcommand{\listfigurename}{ÍNDICE DE FIGURAS}
-\phantomsection
-\addcontentsline{toc}{chapter}{\normalfont ÍNDICE DE FIGURAS}
-\addtocontents{lof}{~\hfill\textbf{Pág.}\par}
-\setlength{\cftfigindent}{0pt} %remove indent
-\renewcommand{\cftfigpresnum}{\bfseries}
-\renewcommand{\cftfigaftersnum}{.}
-\listoffigures %Inserta el índice de figuras
+% \cleardoublepage
+% \renewcommand{\listfigurename}{ÍNDICE DE FIGURAS}
+% \phantomsection
+% \addcontentsline{toc}{chapter}{\normalfont ÍNDICE DE FIGURAS}
+% \addtocontents{lof}{~\hfill\textbf{Pág.}\par}
+% \setlength{\cftfigindent}{0pt} %remove indent
+% \renewcommand{\cftfigpresnum}{\bfseries}
+% \renewcommand{\cftfigaftersnum}{.}
+% \listoffigures %Inserta el índice de figuras
+%
 
-
-%%%%%%%%%%%% ÍNDICE DE ANEXOS
-\cleardoublepage
-\phantomsection
-\addcontentsline{toc}{chapter}{\normalfont ÍNDICE DE ANEXOS}
-\addtocontents{apx}{~\hfill\textbf{Pág.}\par}
-\listofappendixchapter
+% %%%%%%%%%%%% ÍNDICE DE ANEXOS
+% \cleardoublepage
+% \phantomsection
+% \addcontentsline{toc}{chapter}{\normalfont ÍNDICE DE ANEXOS}
+% \addtocontents{apx}{~\hfill\textbf{Pág.}\par}
+% \listofappendixchapter
 
 
 %%%%%%%%%%%% ÍNDICE DE ACRÓNIMOS
-\cleardoublepage
-\phantomsection
-\addcontentsline{toc}{chapter}{\normalfont ÍNDICE DE ACRÓNIMOS}
-\input{abreviaturas}
+% \cleardoublepage
+% \phantomsection
+% \addcontentsline{toc}{chapter}{\normalfont ÍNDICE DE ACRÓNIMOS}
+% \input{abreviaturas}
 
 
 %%%%%%%%%%%% RESUMEN
@@ -355,18 +363,18 @@
 \input{RESUMEN} %Inserta el resumen
 
 %%%%%%%%%%%% ABSTRACT
-\cleardoublepage
-\phantomsection
-\addcontentsline{toc}{chapter}{\normalfont ABSTRACT}
-\input{ABSTRACT} %Inserta el abstract
-
+% \cleardoublepage
+% \phantomsection
+% \addcontentsline{toc}{chapter}{\normalfont ABSTRACT}
+% \input{ABSTRACT} %Inserta el abstract
+%
 %%%%%%%%%%%% INTRODUCCIÓN
-\cleardoublepage
-\pagenumbering{arabic}
-\setcounter{page}{1}
-\phantomsection
-\addcontentsline{toc}{chapter}{\normalfont INTRODUCCIÓN}
-\input{introduccion}
+% \cleardoublepage
+% \pagenumbering{arabic}
+% \setcounter{page}{1}
+% \phantomsection
+% \addcontentsline{toc}{chapter}{\normalfont INTRODUCCIÓN}
+% \input{introduccion}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -383,36 +391,43 @@
 \input{3_Metodologia} %Inserta el capítulo 3
 \authoredby{A}
 \input{4_Resultados} %Inserta el capítulo 4
+\input{5_Costo}
+\input{6_Evaluacion}
+\input{7_Conclusiones}
+\input{8_Recomendaciones}
 
-\cleardoublepage
-\phantomsection
-\addcontentsline{toc}{chapter}{\normalfont CONCLUSIONES}
-\input{conclusiones} %Inserta conclusiones
+% \cleardoublepage
+% \phantomsection
+% \addcontentsline{toc}{chapter}{\normalfont CONCLUSIONES}
+% \input{conclusiones} %Inserta conclusiones
 
-\cleardoublepage
-\phantomsection
-\addcontentsline{toc}{chapter}{\normalfont RECOMENDACIONES}
-\input{recomendaciones} %Inserta recomendaciones
+% \cleardoublepage
+% \phantomsection
+% \addcontentsline{toc}{chapter}{\normalfont RECOMENDACIONES}
+% \input{recomendaciones} %Inserta recomendaciones
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+ \clearpage\phantomsection\addcontentsline{toc}{chapter}{\normalfont BIBLIOGRAFÍA}
+ \renewcommand\bibname{BIBLIOGRAFÍA} %Inserta BIBLIOGRAFÍA EN APA7
 
-\clearpage\phantomsection\addcontentsline{toc}{chapter}{\normalfont BIBLIOGRAFÍA}
-\renewcommand\bibname{BIBLIOGRAFÍA} %Inserta BIBLIOGRAFÍA EN APA7
+\printbibliography 
 
-\printbibliography
+% \bibliographystyle{apacite}
+% \bibliography{mybib}
+
 
 %%%%%%%%%%%
-\cleardoublepage
-\phantomsection
-\addcontentsline{toc}{chapter}{\normalfont ANEXOS}
-\input{anexo} %Inserta Anexos
-\addtocontents{toc}{\protect\SpecialDocumentsTocHeading}
+% \cleardoublepage
+% \phantomsection
+% \addcontentsline{toc}{chapter}{\normalfont ANEXOS}
+% \input{anexo} %Inserta Anexos
+% \addtocontents{toc}{\protect\SpecialDocumentsTocHeading}
 
 %%%%%%%%%%%%%
 %CONFIGURACIÓN DE ANEXOS
 %%%%%%%%%%%%%
 
-\appendix
+% \appendix
 
 \makeatletter
 \def\@chapter[#1]#2{
@@ -448,8 +463,6 @@
 %%%%%%%%%%%%%
 %AQUÍ PUEDES AGREGAR TUS ANEXOS
 %%%%%%%%%%%%%
-
-\input{anexo1} %Inserta el anexo1
 
 
 \end{document}

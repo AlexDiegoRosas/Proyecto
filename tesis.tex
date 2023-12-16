@@ -303,7 +303,7 @@
 
 %%%%%% INICIO DE INDICE GENERAL
 
-\pagenumbering{roman}
+\pagenumbering{arabic}
 \setcounter{page}{1} %Inserta pag al índice general
 \addtocontents{toc}{~\hfill\textbf{Pág.}\par\medskip}
 \input{dedicatoria} %Inserta ldedicatoria
@@ -431,25 +431,25 @@
 
 \makeatletter
 \def\@chapter[#1]#2{
-                        \ifnum \c@secnumdepth >\m@ne
-                         \refstepcounter{chapter}%
-                         \typeout{\@chapapp\space\thechapter.}%
-                         \addcontentsline{apx}{chapter}%NEW
-                        {\protect\numberline{\thechapter} \normalfont#1}%
-                       
-                    \else
-                      \addcontentsline{apx}{chapter}{#1}%NEW
-                    \fi
-                    \chaptermark{#1}%
-                    \addtocontents{lof}{\protect\addvspace{10\p@}}%
-                    \addtocontents{lot}{\protect\addvspace{10\p@}}%
-                    \if@twocolumn
-                    
-                      \@topnewpage[\@makechapterhead{#2}]%
-                    \else
-                      \@makechapterhead{#2}%
-                      \@afterheading
-                    \fi}
+  \ifnum \c@secnumdepth >\m@ne
+  \refstepcounter{chapter}%
+  \typeout{\@chapapp\space\thechapter.}%
+  \addcontentsline{apx}{chapter}%NEW
+  {\protect\numberline{\thechapter} \normalfont#1}%
+
+  \else
+  \addcontentsline{apx}{chapter}{#1}%NEW
+  \fi
+  \chaptermark{#1}%
+  \addtocontents{lof}{\protect\addvspace{10\p@}}%
+  \addtocontents{lot}{\protect\addvspace{10\p@}}%
+  \if@twocolumn
+
+  \@topnewpage[\@makechapterhead{#2}]%
+  \else
+  \@makechapterhead{#2}%
+  \@afterheading
+  \fi}
 \makeatother
 
 
